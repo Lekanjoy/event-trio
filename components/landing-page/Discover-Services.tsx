@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Button from "../button";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import rideIcon from "@/public/landing-page/rideIcon.png";
 import tuxIcon from "@/public/landing-page/tuxIcon.png";
 import bagIcon from "@/public/landing-page/bagIcon.png";
 
 const Discover = () => {
   return (
-    <section className="px-4 py-16 lg:py-[112px] lg:px-16">
+    <section className="px-4 pb-16 lg:pb-[112px] lg:px-16">
       <div className="flex flex-col mb-12 lg:mb-20 lg:max-w-xl xl:max-w-3xl">
         <span className="text-sm font-semibold mb-3 lg:mb-4 lg:text-base">
           Elevate
@@ -23,7 +24,11 @@ const Discover = () => {
 
       <div className="flex flex-col gap-y-12 justify-between lg:flex-row lg:gap-x-12">
         <div className="flex flex-col gap-y-3 lg:gap-y-6">
-          <Image src={tuxIcon} alt="Tuxedo rental icon" className="w-10 h-10 border border-black/50 p-1 rounded-full" />
+          <Image
+            src={tuxIcon}
+            alt="Tuxedo rental icon"
+            className="w-10 h-10 border border-black/50 p-1 rounded-full"
+          />
           <p className=" font-bold text-2xl">
             Tuxedo Rentals for Every Special Occasion
           </p>
@@ -33,7 +38,11 @@ const Discover = () => {
         </div>
 
         <div className="flex flex-col gap-y-3 lg:gap-y-6">
-          <Image src={bagIcon} alt="Designer bag icon" className="w-10 h-10 border border-black/50 p-1 rounded-full" />
+          <Image
+            src={bagIcon}
+            alt="Designer bag icon"
+            className="w-10 h-10 border border-black/50 p-1 rounded-full"
+          />
           <p className=" font-bold text-2xl">
             Designer Bag Rentals to Complement Your Look
           </p>
@@ -43,7 +52,11 @@ const Discover = () => {
         </div>
 
         <div className="flex flex-col gap-y-3 lg:gap-y-6">
-          <Image src={rideIcon} alt="Event ride icon" className="w-10 h-10 border border-black/50 p-1 rounded-full" />
+          <Image
+            src={rideIcon}
+            alt="Event ride icon"
+            className="w-10 h-10 border border-black/50 p-1 rounded-full"
+          />
           <p className=" font-bold text-2xl">
             Convenient Event Ride Booking for Your Needs
           </p>
@@ -54,12 +67,15 @@ const Discover = () => {
       </div>
 
       <div className="flex gap-x-2 items-center mt-6 lg:mt-12">
-        <Button className="bg-transparent text-background">
-          Learn More
-        </Button>
+        <Button className="bg-transparent text-background">Learn More</Button>
 
-        <Button as="link" href="/auth/sign-up" className="bg-transparent text-background border-none">
-          Sign Up 
+        <Button
+          as="link"
+          href="/auth/sign-up"
+          className="bg-transparent text-background border-none flex items-center gap-x-1"
+        >
+          <span>Sign Up</span>
+          <MdKeyboardArrowRight size={20}/>
         </Button>
       </div>
     </section>
