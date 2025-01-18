@@ -23,7 +23,7 @@ const Hero = () => {
         </div>
       </div>
       {/* Image Grid */}
-      <div className="grid grid-cols-6 grid-rows-6 gap-4 mt-12 lg:mt-20 lg:max-h-[538px]">
+      <div className="grid grid-cols-6 grid-rows-6 gap-4 mt-12 lg:mt-20 lg:max-h-[calc(100dvh-92px)]">
         <div
           key="item-1"
           className="relative col-start-1 row-start-1 col-span-3 row-span-3 ease-in-out duration-500 hover:scale-105"
