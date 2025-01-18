@@ -31,7 +31,7 @@ const Header = () => {
   }
 
   return (
-    <header className="fixed z-20 w-full left-0 top-0 px-4 py-2 border-b border-black bg-white flex justify-between items-center cursor-pointer lg:px-10 xl:px-16">
+    <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 border-b border-black bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
       <Link href={"/"} className="relative z-10 w-[120px] lg:w-[150px]">
         <Image src={logo} alt={"EventTrio Logo"} className="w-full h-full"/>
       </Link>
