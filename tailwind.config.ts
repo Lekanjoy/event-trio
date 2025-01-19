@@ -18,6 +18,9 @@ export default {
         neutral1: "#333333",   // Charcoal Gray
         neutral2: "#C0C0C0",   // Soft Silver
       },
+      backgroundImage : {
+        downloadApp : 'url(/landing-page/download.jpg)'
+      }
     },
   },
   

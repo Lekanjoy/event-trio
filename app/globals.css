@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-pagination {
+    text-align: left!important;
+    position: relative!important;
+    margin-top: 40px;
+}
+
+.swiper-pagination-bullet-active{
+background-color: black !important;
+}
+
+
