@@ -1,6 +1,8 @@
 import Header from "@/components/header";
+import Contact from "@/components/landing-page/Contact";
 import CTA from "@/components/landing-page/CTA";
 import Discover from "@/components/landing-page/Discover-Services";
+import FAQ from "@/components/landing-page/FAQ";
 import Hero from "@/components/landing-page/Hero";
 import Journey from "@/components/landing-page/Journey";
 import RentalApp from "@/components/landing-page/RentalApp";
@@ -20,6 +22,8 @@ export default function Home() {
     <CTA/>
     <Journey/>
     <Team/>
+    <FAQ/>
+    <Contact/>
     </main>
   );
 }
