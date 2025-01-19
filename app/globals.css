@@ -12,4 +12,8 @@
 background-color: black !important;
 }
 
+footer a:hover {
+    text-decoration: underline;
+}
+
 
