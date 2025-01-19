@@ -11,7 +11,7 @@ import avatar from "@/public/landing-page/avatar.svg";
 const Testimonials = () => {
   return (
     <section className="px-4 pb-16 lg:pb-[112px] lg:px-16">
-      <h4 className="font-bold text-4xl mb-5 lg:mb-6">Customer Testimonials</h4>
+      <h4 className="font-bold text-4xl mb-5 lg:mb-6 lg:text-5xl">Customer Testimonials</h4>
       <p className="text-sm lg:text-base">
         Hear what people have said about us!
       </p>
@@ -158,7 +158,7 @@ const Testimonials = () => {
             </div>
           </div>
         </SwiperSlide>
-        
+
       </Swiper>
     </section>
   );
