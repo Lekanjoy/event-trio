@@ -67,15 +67,15 @@ const Discover = () => {
       </div>
 
       <div className="flex gap-x-2 items-center mt-6 lg:mt-12">
-        <Button className="bg-transparent text-background">Learn More</Button>
+        <Button className="bg-transparent text-black">Learn More</Button>
 
         <Button
           as="link"
-          href="/auth/sign-up"
-          className="bg-transparent text-background border-none flex items-center gap-x-1"
+          href="/sign-up"
+          className="bg-transparent text-black border-none flex items-center gap-x-1"
         >
           <span>Sign Up</span>
-          <MdKeyboardArrowRight size={20}/>
+          <MdKeyboardArrowRight size={20} />
         </Button>
       </div>
     </section>

@@ -16,10 +16,10 @@ const Hero = () => {
           convenience like never before for your next special occasion.
         </p>
         <div className="flex gap-x-2">
-          <Button as="link" href="/auth/sign-up">
+          <Button as="link" href="/sign-up">
             Get Started
           </Button>
-          <Button className="bg-transparent text-background">Learn More</Button>
+          <Button className="bg-transparent text-black">Learn More</Button>
         </div>
       </div>
       {/* Image Grid */}

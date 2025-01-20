@@ -16,7 +16,7 @@ const Button = ({ className, children, as = "button", href }: ButtonProps) => {
       <a
         href={href}
         className={cn(
-          "border border-black text-sm w-fit h-fit  py-2 px-5 bg-background text-foreground font-medium lg:text-base",
+          "border border-black text-sm w-fit h-fit  py-2 px-5 bg-black text-white font-medium lg:text-base",
           className
         )}
       >
@@ -28,7 +28,7 @@ const Button = ({ className, children, as = "button", href }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "border border-black text-sm w-fit h-fit py-2 px-5 bg-background text-foreground font-medium lg:text-base",
+        "border border-black text-sm w-fit h-fit py-2 px-5 bg-black text-white font-medium lg:text-base",
         className
       )}
     >

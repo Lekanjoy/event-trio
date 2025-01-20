@@ -14,10 +14,10 @@ const CTA = () => {
           your ride.
         </p>
         <div className="flex gap-x-4 z-[2] mt-3">
-          <Button className="bg-white text-background">Download</Button>
+          <Button className="bg-white text-black">Download</Button>
           <Button
             as="link"
-            href="/auth/sign-up"
+            href="/sign-up"
             className="bg-transparent text-white border-white"
           >
             Sign Up

@@ -22,7 +22,7 @@ const Contact = () => {
           <Button
             as="link"
             href="/contact"
-            className="bg-transparent text-background flex items-center"
+            className="bg-transparent text-black flex items-center"
           >
             Contact <MdKeyboardArrowRight size={20} />
           </Button>

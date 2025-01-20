@@ -55,12 +55,12 @@ const Step = () => {
       </div>
 
       <div className="w-fit text-center flex gap-x-2 justify-center items-center mt-12 lg:mt-20 ">
-        <Button className="bg-transparent text-background">Rent</Button>
+        <Button className="bg-transparent text-black">Rent</Button>
 
         <Button
           as="link"
           href="/explore"
-          className="bg-transparent text-background border-none flex items-center gap-x-1"
+          className="bg-transparent text-black border-none flex items-center gap-x-1"
         >
           <span>Explore</span>
           <MdKeyboardArrowRight size={20} />

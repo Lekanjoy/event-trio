@@ -3,58 +3,9 @@ import Image from "next/image";
 import linkedin from "@/public/landing-page/LinkedIn.svg";
 import X from "@/public/landing-page/X.svg";
 import web from "@/public/landing-page/Dribble.svg";
-import Alice from "@/public/landing-page/member1.jpg";
-import Mark from "@/public/landing-page/member2.jpg";
-import Sarah from "@/public/landing-page/member3.jpg";
-import James from "@/public/landing-page/member4.jpg";
-import Emily from "@/public/landing-page/member6.jpg";
-import Michael from "@/public/landing-page/member5.jpg";
 import { cn } from "@/lib/utils";
+import { teamData } from "@/data";
 
-const teamData = [
-  {
-    id: 0,
-    name: "Alice Johson",
-    role: "Product Manager",
-    text: "Passionate about creating seamless experiences for our users.",
-    img: Alice,
-  },
-  {
-    id: 1,
-    name: "Mark Smith",
-    role: "Lead Developer ",
-    text: "Crafting innovative solutions to enhance our app`s functionality.",
-    img: Mark,
-  },
-  {
-    id: 2,
-    name: "Sarah Lee",
-    role: "Marketing Director",
-    text: "Connecting with our audience to share our vision.",
-    img: Sarah,
-  },
-  {
-    id: 3,
-    name: "James Brown",
-    role: "UX Designer",
-    text: "Designing intuitive interfaces that enhance user engagement.",
-    img: James,
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    role: "Data Analyst",
-    text: "Analyzing trends to improve our service offerings.",
-    img: Emily,
-  },
-  {
-    id: 5,
-    name: "Michael Wilson",
-    role: "Customer Support",
-    text: "Ensuring our users receive the best possible assistance.",
-    img: Michael,
-  },
-];
 
 const Team = () => {
   return (

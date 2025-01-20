@@ -16,7 +16,7 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [showNav, setShowNav] = useState(false);
-  const isLoggedIn  = false;
+  const isLoggedIn = false;
 
   const variants = {
     hidden: { x: "100%" },
@@ -27,13 +27,13 @@ const Header = () => {
     // await logOutUser();
     // Clear session
     sessionStorage.removeItem("token");
-    router.push("/auth/login");
+    router.push("/login");
   }
 
   return (
     <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 shadow-md bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
       <Link href={"/"} className="relative z-10 w-[120px] lg:w-[150px]">
-        <Image src={logo} alt={"EventTrio Logo"} className="w-full h-full"/>
+        <Image src={logo} alt={"EventTrio Logo"} className="w-full h-full" />
       </Link>
 
       <div className="flex items-center gap-x-6 lg:hidden">
@@ -50,7 +50,12 @@ const Header = () => {
           <Link
             key={item.name}
             href={item.href}
-            className={cn("text-sm  hover:text-secondaryColor-100 xl:text-base", pathname === item.href ? "text-primaryColor" : "text-secondaryColor")}
+            className={cn(
+              "text-sm  hover:text-secondaryColor-100 xl:text-base",
+              pathname === item.href
+                ? "text-primaryColor"
+                : "text-secondaryColor"
+            )}
           >
             {item.name}
           </Link>
@@ -58,16 +63,13 @@ const Header = () => {
       </nav>
       {!isLoggedIn ? (
         <div className="hidden gap-x-4 items-center lg:flex lg:flex-row">
-         <Button
-            as="link"
-            href="/auth/sign-up"
-          >
+          <Button as="link" href="/sign-up">
             Sign Up
           </Button>
           <Button
             as="link"
-            href="auth/login"
-            className="text-background bg-transparent "
+            href="/login"
+            className="text-black bg-transparent "
           >
             Log in
           </Button>

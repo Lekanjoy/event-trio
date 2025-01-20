@@ -2,37 +2,7 @@ import Image from "next/image";
 import Button from "../button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { cn } from "@/lib/utils";
-import launch from "@/public/landing-page/launch.svg";
-import partnership from "@/public/landing-page/partnership.svg";
-import milestone from "@/public/landing-page/milestone.svg";
-import expansion from "@/public/landing-page/collaboration.svg";
-
-const steps = [
-  {
-    id: 0,
-    title: "First Launch",
-    text: "Launched our app, making luxury rentals accessible for everyone.",
-    icon: launch,
-  },
-  {
-    id: 1,
-    title: "Partnership Growth",
-    text: "Established partnerships with top designers and brands to expand our offerings.",
-    icon: partnership,
-  },
-  {
-    id: 2,
-    title: "User Milestone",
-    text: "Reached 10,000 active users, transforming how people prepare for events.",
-    icon: milestone,
-  },
-  {
-    id: 3,
-    title: "Service Expansion",
-    text: "Introduced ride-booking feature, ensuring seamless event experiences for our customers.",
-    icon: expansion,
-  },
-];
+import { steps } from "@/data";
 
 const Journey = () => {
   return (
@@ -43,11 +13,11 @@ const Journey = () => {
           Our Journey to Redefining Event Fashion
         </p>
         <div className="flex items-start self-start">
-          <Button className="bg-transparent text-background">Discover</Button>
+          <Button className="bg-transparent text-black">Discover</Button>
           <Button
             as="link"
-            href="/auth/sign-up"
-            className="bg-transparent text-background border-none flex items-center gap-x-1"
+            href="/sign-up"
+            className="bg-transparent text-black border-none flex items-center gap-x-1"
           >
             <span>Explore</span>
             <MdKeyboardArrowRight size={20} />
