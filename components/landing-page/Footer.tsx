@@ -10,7 +10,7 @@ import linkedIn from "@/public/landing-page/LinkedIn.svg";
 const Footer = () => {
   return (
     <>
-      <footer className=" w-full min-h-[300px] pb-16 px-4 flex flex-col justify-between gap-y-12 lg:flex-row lg:px-16">
+      <footer className=" w-full min-h-[300px] border-t pt-10 pb-16 px-4 flex flex-col justify-between gap-y-12 lg:flex-row lg:px-16">
         <div className="flex flex-col gap-y-2">
           <Link href={"/"} className="relative z-10 w-[120px] lg:w-[150px]">
             <Image

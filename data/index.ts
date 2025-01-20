@@ -9,6 +9,57 @@ import James from "@/public/landing-page/member4.jpg";
 import Emily from "@/public/landing-page/member6.jpg";
 import Michael from "@/public/landing-page/member5.jpg";
 
+export const tuxData = [
+  {
+    id: 0,
+    name: "Classic Black",
+    price: "55",
+    rating: 5
+  },
+  {
+    id: 1,
+    name: "Midnight Blue",
+    price: "55",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Charcoal Gray",
+    price: "55",
+    rating: 4.5
+  },
+  {
+    id: 3,
+    name: "White Dinner",
+    price: "75",
+    rating: 4.9
+  },
+  {
+    id: 4,
+    name: "Ivory Tuxedo",
+    price: "55",
+    rating: 4
+  },
+  {
+    id: 5,
+    name: "Slim Fit",
+    price: "55",
+    rating: 3.8
+  },
+  {
+    id: 6,
+    name: "Tailored Fit",
+    price: "55",
+    rating: 4.5
+  },
+  {
+    id: 7,
+    name: "Vintage Style",
+    price: "55",
+    rating: 5
+  },
+];
+
 export const teamData = [
   {
     id: 0,
