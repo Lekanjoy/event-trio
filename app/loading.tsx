@@ -7,7 +7,7 @@ const Loading = () => {
       <Image
         src={logo}
         alt="EventTrio Logo"
-        className="animate-bounce"
+        className="w-[120px] animate-bounce lg:w-[150px]"
       />
     </div>
   );
