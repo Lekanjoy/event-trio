@@ -1,18 +1,12 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { navItems } from "@/data";
 import Button from "@/components/button";
+import useLoginStatus from "@/hooks/useLoginStatus";
+import { logoutUser } from "@/app/(auth)/login/action";
 
 const MobileNav = () => {
-  const isLoggedIn = false;
-  const router = useRouter();
+  const { isLoggedIn } = useLoginStatus();
 
-  async function logout() {
-    // await logOutUser();
-    // Clear session
-    sessionStorage.removeItem("token");
-    router.push("/login");
-  }
   return (
     <aside className="z-10 absolute  top-[0] left-0 px-6 w-full bg-white h-[90dvh] bg- shadow flex flex-col gap-y-14 lg:hidden">
       <div className="flex flex-col gap-y-8 mt-[120px]">
@@ -32,21 +26,12 @@ const MobileNav = () => {
           <Button as="link" href="/sign-up">
             Sign Up
           </Button>
-          <Button
-            as="link"
-            href="/login"
-            className="text-black bg-transparent"
-          >
+          <Button as="link" href="/login" className="text-black bg-transparent">
             Log in
           </Button>
         </div>
       ) : (
-        <button
-          onClick={logout}
-          className="w-fit py-3 px-10 bg-primaryColor text-white text-xs rounded-md "
-        >
-          Logout
-        </button>
+        <Button onClick={logoutUser}>Logout</Button>
       )}
     </aside>
   );

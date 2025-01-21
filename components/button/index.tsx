@@ -1,19 +1,27 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface ButtonProps {
   className?: string;
   children: React.ReactNode;
   as?: "button" | "link";
   href?: string;
+  onClick?: () => void;
 }
 
-const Button = ({ className, children, as = "button", href }: ButtonProps) => {
+const Button = ({
+  className,
+  children,
+  as = "button",
+  href,
+  onClick,
+}: ButtonProps) => {
   if (as === "link") {
     if (!href) {
       throw new Error("The 'href' prop is required when 'as' is 'link'");
     }
     return (
-      <a
+      <Link
         href={href}
         className={cn(
           "border border-black text-sm w-fit h-fit  py-2 px-5 bg-black text-white font-medium lg:text-base",
@@ -21,12 +29,13 @@ const Button = ({ className, children, as = "button", href }: ButtonProps) => {
         )}
       >
         {children}
-      </a>
+      </Link>
     );
   }
 
   return (
     <button
+      onClick={onClick}
       className={cn(
         "border border-black text-sm w-fit h-fit py-2 px-5 bg-black text-white font-medium lg:text-base",
         className

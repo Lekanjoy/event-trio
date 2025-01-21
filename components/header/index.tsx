@@ -4,31 +4,25 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import MobileNav from "./mobile-nav";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/data";
 import hamburgerIcon from "@/public/landing-page/hamburgerIcon.svg";
 import closeIcon from "@/public/landing-page/closeIcon.svg";
 import logo from "@/public/landing-page/logo.png";
 import Button from "../button";
+import { logoutUser } from "@/app/(auth)/login/action";
+import useLoginStatus from "@/hooks/useLoginStatus";
 
 const Header = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [showNav, setShowNav] = useState(false);
-  const isLoggedIn = false;
+  const { isLoggedIn } = useLoginStatus();
 
   const variants = {
     hidden: { x: "100%" },
     visible: { x: 0 },
   };
-
-  async function logout() {
-    // await logOutUser();
-    // Clear session
-    sessionStorage.removeItem("token");
-    router.push("/login");
-  }
 
   return (
     <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 shadow-md bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
@@ -75,12 +69,7 @@ const Header = () => {
           </Button>
         </div>
       ) : (
-        <button
-          className="whitespace-nowrap w-fit hidden items-center gap-x-2 py-3 px-5 text-white bg-primaryColor rounded-md text-xs font-semibold ease-in-out duration-300 sm:text-sm lg:text-base 2xl:text-lg lg:hover:opacity-80 lg:flex"
-          onClick={logout}
-        >
-          Logout
-        </button>
+        <Button onClick={logoutUser} className="hidden lg:flex">Logout</Button>
       )}
 
       {/* Mobile Nav and UI */}
