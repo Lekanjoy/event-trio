@@ -1,16 +1,16 @@
 import Image from "next/image";
-import logo from "@/public/landing-page/logo.png";
+import logo from '../favicon.ico'
 
-const loading = () => {
+const Loading = () => {
   return (
-    <div className="fixed inset-0 bg-white/70 backdrop-blur-sm z-[999] w-full  h-screen flex justify-center items-center">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/70 backdrop-blur-sm">
       <Image
         src={logo}
-        alt={"EventTrio Logo"}
-        className="w-[120px] animate-bounce lg:w-[150px]"
+        alt="EventTrio Logo"
+        className="animate-bounce"
       />
     </div>
   );
 };
 
-export default loading;
+export default Loading;
