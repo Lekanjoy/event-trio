@@ -1,9 +1,9 @@
-import logo from "@/public/landing-page/logo.png";
 import Image from "next/image";
+import logo from "@/public/landing-page/logo.png";
 
 const loading = () => {
   return (
-    <div className="absolute bg-white z-50 w-full top-0 left-0 h-screen flex justify-center items-center">
+    <div className="fixed inset-0 bg-white/70 backdrop-blur-sm z-[999] w-full  h-screen flex justify-center items-center">
       <Image
         src={logo}
         alt={"EventTrio Logo"}

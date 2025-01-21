@@ -1,12 +1,16 @@
-import { cn } from "@/lib/utils";
+"use client";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useFormStatus } from "react-dom";
+import { type ComponentProps } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentProps<"button"> {
   className?: string;
   children: React.ReactNode;
   as?: "button" | "link";
   href?: string;
   onClick?: () => void;
+  pendingText?: string;
 }
 
 const Button = ({
@@ -15,7 +19,13 @@ const Button = ({
   as = "button",
   href,
   onClick,
+  pendingText = "Loading...",
+  ...props
 }: ButtonProps) => {
+  const { pending, action } = useFormStatus();
+
+  const isPending = pending && action === props.formAction;
+
   if (as === "link") {
     if (!href) {
       throw new Error("The 'href' prop is required when 'as' is 'link'");
@@ -35,13 +45,16 @@ const Button = ({
 
   return (
     <button
-      onClick={onClick}
+      {...(onClick && { onClick })}
       className={cn(
         "border border-black text-sm w-fit h-fit py-2 px-5 bg-black text-white font-medium lg:text-base",
+        isPending && 'opacity-50 cursor-not-allowed',
         className
       )}
+      {...props}
+      aria-disabled={isPending}
     >
-      {children}
+      {isPending ? pendingText : children}
     </button>
   );
 };
