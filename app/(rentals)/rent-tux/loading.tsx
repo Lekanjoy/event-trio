@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from '../favicon.ico'
+import logo from '@/app/favicon.ico'
 
 const Loading = () => {
   return (
