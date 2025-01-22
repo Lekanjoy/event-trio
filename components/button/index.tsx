@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useFormStatus } from "react-dom";
 import { type ComponentProps } from "react";
+import { useFormStatus } from "react-dom";
+import { cn } from "@/lib/utils";
 
 interface ButtonProps extends ComponentProps<"button"> {
   className?: string;

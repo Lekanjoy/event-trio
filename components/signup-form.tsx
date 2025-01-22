@@ -17,7 +17,7 @@ import {
 import Button from "./button";
 
 interface SignUpFormProps extends React.ComponentPropsWithoutRef<"div"> {
-  message?: string;
+  message?: string | string [];
 }
 
 export function SignUpForm({ className, message, ...props }: SignUpFormProps) {

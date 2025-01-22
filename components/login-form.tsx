@@ -11,10 +11,11 @@ import { signInWithGoogleAction } from "@/app/(auth)/sign-up/action";
 import Button from "./button";
 import bg from "@/public/landing-page/tux1.jpg";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+interface LoginFormProps extends React.ComponentPropsWithoutRef<"div"> {
+  message?: string | string[];
+}
+
+export function LoginForm({ className, message, ...props }: LoginFormProps) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden">
@@ -27,6 +28,11 @@ export function LoginForm({
                   <p className="text-balance text-muted-foreground">
                     Login to your EventTrio account
                   </p>
+                  {message && (
+                    <p className="text-white p-2 bg-red-500 my-1 self-start w-full">
+                      {message}
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
