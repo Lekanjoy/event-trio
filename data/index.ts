@@ -8,55 +8,84 @@ import Sarah from "@/public/landing-page/member3.jpg";
 import James from "@/public/landing-page/member4.jpg";
 import Emily from "@/public/landing-page/member6.jpg";
 import Michael from "@/public/landing-page/member5.jpg";
+import classicBlack from "@/public/tuxedo/classic-black.jpg";
+import midnightBlue from "@/public/tuxedo/midnight-blue.webp";
+import ivory from "@/public/tuxedo/ivory.webp";
+import charcoalGray from "@/public/tuxedo/charcoal-gray.webp";
+import whiteDinner from "@/public/tuxedo/white-dinner.webp";
+import slimfit from "@/public/tuxedo/slimfit.webp";
+import vintage from "@/public/tuxedo/vintage.jpeg";
+import tailoredFit from "@/public/tuxedo/tailored-fit.webp";
+
+
+
+
+
 
 export const tuxData = [
   {
     id: 0,
     name: "Classic Black",
     price: "55",
-    rating: 5
+    rating: 5,
+    img: classicBlack,
+    quantity: 0
   },
   {
     id: 1,
     name: "Midnight Blue",
     price: "55",
-    rating: 5
+    rating: 5,
+    img: midnightBlue,
+    quantity: 0
   },
   {
     id: 2,
     name: "Charcoal Gray",
     price: "55",
-    rating: 4.5
+    rating: 4.5,
+    img: charcoalGray,
+    quantity: 0
   },
   {
     id: 3,
     name: "White Dinner",
     price: "75",
-    rating: 4.9
+    rating: 4.9,
+    img: whiteDinner,
+    quantity: 0
   },
   {
     id: 4,
     name: "Ivory Tuxedo",
     price: "55",
-    rating: 4
+    rating: 4,
+    img: ivory,
+    quantity: 0
   },
   {
     id: 5,
     name: "Slim Fit",
     price: "55",
-    rating: 3.8
+    rating: 3.8,
+    img: slimfit,
+    quantity: 0
   },
   {
     id: 6,
     name: "Tailored Fit",
     price: "55",
-    rating: 4.5
+    rating: 4.5,
+    img: tailoredFit,
+    quantity: 0
   },
   {
     id: 7,
     name: "Vintage Style",
     price: "55",
-    rating: 5
+    rating: 5,
+    img: vintage,
+    quantity: 0
   },
 ];
 

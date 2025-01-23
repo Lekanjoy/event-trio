@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default function RootLayout({
         className={`${quicksand.className} antialiased`}
       >
         {children}
+        <Toaster/>
       </body>
     </html>
   );
