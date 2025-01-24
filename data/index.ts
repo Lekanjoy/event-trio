@@ -17,11 +17,6 @@ import slimfit from "@/public/tuxedo/slimfit.webp";
 import vintage from "@/public/tuxedo/vintage.jpeg";
 import tailoredFit from "@/public/tuxedo/tailored-fit.webp";
 
-
-
-
-
-
 export const tuxData = [
   {
     id: 0,

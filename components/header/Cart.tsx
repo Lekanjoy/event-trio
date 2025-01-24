@@ -16,7 +16,10 @@ import { useCartStore } from "@/store/store";
 
 export default function CartSheet() {
   const cart = useCartStore((state) => state.cart);
-  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0);
+  const totalPrice = cart.reduce(
+    (total, item) => total + parseFloat(item.price) * item.quantity,
+    0
+  );
 
   return (
     <Sheet>
@@ -36,7 +39,7 @@ export default function CartSheet() {
               Review the items in your cart. You can adjust quantities or remove
               items before proceeding to checkout.
             </SheetDescription>
-          )}        
+          )}
         </SheetHeader>
         <div className="grid gap-y-4 py-4">
           {cart.length === 0 && (

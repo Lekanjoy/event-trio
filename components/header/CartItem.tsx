@@ -1,5 +1,5 @@
-import { type CartItem as TypeCartItem, useCartStore } from "@/store/store";
 import Image from "next/image";
+import { type CartItem as TypeCartItem, useCartStore } from "@/store/store";
 import { MdOutlineDelete } from "react-icons/md";
 
 type CartItemProps = {
