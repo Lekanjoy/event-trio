@@ -14,6 +14,7 @@ import Button from "../button";
 import { logoutUser } from "@/app/(auth)/login/action";
 import useLoginStatus from "@/hooks/useLoginStatus";
 import Cart from "./Cart";
+import OneTapComponent from "@/app/(auth)/login/OneTap";
 
 const Header = () => {
   const pathname = usePathname();
@@ -26,6 +27,8 @@ const Header = () => {
   };
 
   return (
+    <>
+    <OneTapComponent/>
     <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 shadow-md bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
       <div className="flex items-center gap-x-6">
         <Image
@@ -94,6 +97,7 @@ const Header = () => {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 };
 
