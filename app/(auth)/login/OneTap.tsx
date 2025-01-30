@@ -41,10 +41,7 @@ const OneTapComponent = () => {
     const initializeGoogleOneTap = async () => {
       // Check if user is already signed in
       const { data } = await supabase.auth.getUser();
-      if (data?.user) {
-        router.push("/");
-        return;
-      }
+      if (data?.user) return;
 
       const [nonce, hashedNonce] = await generateNonce();
 
@@ -66,8 +63,6 @@ const OneTapComponent = () => {
                 description: "Welcome back!",
               });
               requestAnimationFrame(() => window.location.reload());
-
-              
             } catch (error) {
               console.error("Error signing in:", error);
               toast.toast({

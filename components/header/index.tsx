@@ -28,75 +28,81 @@ const Header = () => {
 
   return (
     <>
-    <OneTapComponent/>
-    <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 shadow-md bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
-      <div className="flex items-center gap-x-6">
-        <Image
-          src={showNav ? closeIcon : hamburgerIcon}
-          alt="Hamburger icon"
-          className="relative z-10 lg:hidden"
-          onClick={() => setShowNav(!showNav)}
-        />
-        <Link href={"/"} className="relative z-10 w-[120px] lg:w-[150px]">
-          <Image src={logo} alt={"EventTrio Logo"} className="w-full h-full" />
-        </Link>
-      </div>
-
-      <nav className="hidden gap-x-5 lg:flex lg:flex-row xl:gap-x-10">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className={cn(
-              "text-sm  hover:text-secondaryColor-100 xl:text-base",
-              pathname === item.href
-                ? "text-primaryColor"
-                : "text-secondaryColor"
-            )}
-          >
-            {item.name}
+      <OneTapComponent />
+      <header className="fixed z-20 h-[64px] w-full left-0 top-0 px-4 py-2 shadow-md bg-white flex justify-between items-center cursor-pointer lg:h-[72px] lg:px-10 xl:px-16">
+        <div className="flex items-center gap-x-6">
+          <Image
+            src={showNav ? closeIcon : hamburgerIcon}
+            alt="Hamburger icon"
+            className="relative z-10 lg:hidden"
+            onClick={() => setShowNav(!showNav)}
+          />
+          <Link href={"/"} className="relative z-10 w-[120px] lg:w-[150px]">
+            <Image
+              src={logo}
+              alt={"EventTrio Logo"}
+              className="w-full h-full"
+            />
           </Link>
-        ))}
-      </nav>
-      {!isLoggedIn ? (
-        <div className="hidden gap-x-4 items-center lg:flex lg:flex-row">
-          <Button as="link" href="/sign-up">
-            Sign Up
-          </Button>
-          <Button
-            as="link"
-            href="/login"
-            className="text-black bg-transparent "
-          >
-            Log in
-          </Button>
-          <Cart />
         </div>
-      ) : (
-        <div className="flex items-center gap-x-4">
-          <Button onClick={logoutUser} className="hidden lg:flex">
-            Logout
-          </Button>
-          <Cart />
-        </div>
-      )}
 
-      {/* Mobile Nav and UI */}
-      <AnimatePresence>
-        {showNav && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={variants}
-            transition={{ type: "spring", stiffness: 50 }}
-            className="fixed inset-0"
-          >
-            <MobileNav />
-          </motion.div>
+        <nav className="hidden gap-x-5 lg:flex lg:flex-row xl:gap-x-10">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "text-sm  hover:text-secondaryColor-100 xl:text-base",
+                pathname === item.href
+                  ? "text-primaryColor"
+                  : "text-secondaryColor"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+        {!isLoggedIn ? (
+          <div className="relative flex items-center gap-x-4">
+            <div className="hidden gap-x-4 items-center lg:flex lg:flex-row">
+              <Button as="link" href="/sign-up">
+                Sign Up
+              </Button>
+              <Button
+                as="link"
+                href="/login"
+                className="text-black bg-transparent "
+              >
+                Log in
+              </Button>
+            </div>
+            <Cart />
+          </div>
+        ) : (
+          <div className="flex items-center gap-x-4">
+            <Button onClick={logoutUser} className="hidden lg:flex">
+              Logout
+            </Button>
+            <Cart />
+          </div>
         )}
-      </AnimatePresence>
-    </header>
+
+        {/* Mobile Nav and UI */}
+        <AnimatePresence>
+          {showNav && (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={variants}
+              transition={{ type: "spring", stiffness: 50 }}
+              className="fixed inset-0"
+            >
+              <MobileNav />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 };
