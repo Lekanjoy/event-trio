@@ -7,6 +7,7 @@ export type CartItem = {
   price: string;
   img: StaticImageData;
   quantity: number;
+  rating: number;
 }
 
 type CartState = {

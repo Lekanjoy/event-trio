@@ -1,25 +1,23 @@
 import Image from "next/image";
 import { tuxData } from "@/data";
-import classicBlack from "@/public/tuxedo/classic-black.jpg";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
-import Button from "@/components/button";
-import StyleSelect from "./StyleSelect";
 import TabSwitch from "./TabSwitch";
-import SizeToggleGroup from "./SizeToggleGroup";
+import TuxFilters from "./TuxFilters";
+import { CartItem } from "@/store/store";
 
 const TuxDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
   const tuxId = (await params).id;
-  const tuxItem = tuxData.find((tux) => tux.id.toString() == tuxId);
+  const tuxItem = tuxData.find((tux) => tux.id.toString() == tuxId) as CartItem;
 
-  const rating = tuxItem?.rating as number;
+  const rating = tuxItem?.rating;
 
   return (
     <section className="mt-[128px] flex flex-col gap-y-8 px-4 pb-16 lg:gap-x-10 lg:flex-row lg:pb-[112px] lg:px-16 lg:mt-[144px] 2xl:gap-x-20">
       <Image
-        src={classicBlack}
+        src={tuxItem?.img}
         alt={tuxItem?.name || "Tuxedo"}
-        className="w-full object-cover object-top self-start lg:w-2/4 lg:h-[540px]"
+        className="w-full object-cover object-top self-start h-[300px] lg:w-2/4 lg:h-[540px]"
       />
 
       <div className="flex flex-col gap-y-5">
@@ -79,28 +77,7 @@ const TuxDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
           occasion. From classic to modern designs, we have the perfect tuxedo
           for you.
         </p>
-        <div className="flex flex-col gap-y-2">
-          <p className="text-sm lg:text-base">Style</p>
-          <StyleSelect />
-        </div>
-        <div className="flex flex-col gap-y-2">
-          <p className="text-sm lg:text-base">Size</p>
-          <SizeToggleGroup />
-        </div>
-        <div className="flex flex-col gap-y-4">
-          <div className="flex w-full gap-x-2">
-            <Button className="w-4/5 py-4">Add to cart</Button>
-            <input
-              type="text"
-              className="w-1/5 text-center font-medium p-3 border border-black"
-              defaultValue={1}
-            />
-          </div>
-          <Button className="py-4 bg-transparent text-black w-full">
-            Buy now
-          </Button>
-          <p className="text-sm text-center">Free shipping on orders</p>
-        </div>
+        <TuxFilters tux={tuxItem}/>
         <TabSwitch />
       </div>
     </section>

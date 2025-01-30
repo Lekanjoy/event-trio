@@ -5,13 +5,14 @@ import Button from "@/components/button";
 import { CartItem, useCartStore } from "@/store/store";
 import { useToast } from "@/hooks/use-toast";
 
-interface TuxCardProps {
+export type TuxCardProps = {
   tux: {
     id: number;
     name: string;
     price: string;
     img: StaticImageData;
     quantity: number;
+    rating: number;
   };
 }
 
