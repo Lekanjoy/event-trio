@@ -30,13 +30,22 @@ const CartItem = ({ cart }: CartItemProps) => {
         />
         <div className="flex flex-col gap-y-px">
           <p className="font-medium ">{name}</p>
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => updateOrDeleteItem(id, Number(e.target.value))}
-            className="text-sm w-10 border border-black/40 p-px text-center"
-          />
           <p className="font-semibold text-sm">${price}</p>
+          <div className="flex gap-x-3 items-center mt-1 cursor-pointer lg:gap-x-6">
+            <button
+              onClick={() => updateOrDeleteItem(id, quantity + 1)}
+              className="text-sm font-medium text-white bg-black px-2"
+            >
+              +
+            </button>
+            <span className="text-sm font-bold">{quantity}</span>
+            <button
+              onClick={() => updateOrDeleteItem(id, quantity - 1)}
+              className="text-sm font-medium bg-red-500 px-2 text-white"
+            >
+              -
+            </button>
+          </div>
         </div>
       </div>
       <MdOutlineDelete

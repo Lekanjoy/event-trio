@@ -66,13 +66,22 @@ export default function CartSheet() {
         </div>
         <SheetFooter>
           {cart.length > 0 && (
-            <div className="flex justify-between items-center py-2">
-              <span className="font-medium">Total Price:</span>
-              <span className="font-bold">${totalCartValue.toFixed(2)}</span>
-            </div>
+            <>
+              <div className="flex justify-between items-center pt-2">
+                <span className="font-medium">Subtotal:</span>
+                <span className="font-bold">${totalCartValue.toFixed(2)}</span>
+              </div>
+              <span className="text-gray-600 text-sm italic pb-2">
+                Delivery fees not included yet.
+              </span>
+            </>
           )}
           <SheetClose asChild>
-            {cart.length > 0 && <Button className="w-full">Check out</Button>}
+            {cart.length > 0 && (
+              <Button className="w-full py-3">
+                Checkout <span className="font-bold">(${totalCartValue.toFixed(2)})</span>
+              </Button>
+            )}
           </SheetClose>
         </SheetFooter>
       </SheetContent>

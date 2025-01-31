@@ -10,28 +10,9 @@ const TuxFilters = ({ tux }: TuxCardProps) => {
   const { toast } = useToast();
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
-  const removeFromCart = useCartStore((store) => store.removeFromCart);
-  const updateItemQuantity = useCartStore((store) => store.updateItemQuantity);
 
   const currentTux = cart.find((item) => item.id === tux.id) as CartItem;
-  const { id, quantity } = currentTux || tux;
-
-  // Update or delete item from cart based on quantity
-  const updateOrDeleteItem = (id: number, value: number) => {
-    const itemInCart = cart.find((item) => item.id === id);
-    if (!itemInCart) {
-      toast({
-        description: "Add item to cart first!",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (value < 1) {
-      removeFromCart(id);
-    } else {
-      updateItemQuantity(id, value);
-    }
-  };
+  const { quantity } = currentTux || tux;
 
   const handleAddToCart = (tux: CartItem) => {
     addToCart(tux);
@@ -54,12 +35,9 @@ const TuxFilters = ({ tux }: TuxCardProps) => {
           <Button className="w-4/5 py-4" onClick={() => handleAddToCart(tux)}>
             Add to cart
           </Button>
-          <input
-            type="number"
-            value={quantity | 0}
-            onChange={(e) => updateOrDeleteItem(id, Number(e.target.value))}
+          <span
             className="w-1/5 text-center font-medium p-3 border border-black"
-          />
+          >{quantity | 0}</span>
         </div>
         <Button className="py-4 bg-transparent text-black w-full">
           Buy now
