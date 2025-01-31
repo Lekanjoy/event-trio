@@ -7,7 +7,7 @@ import ride from "@/public/landing-page/ride.jpg";
 const Hero = () => {
   return (
     <section className="flex flex-col items-center justify-center w-full mt-[128px] text-center px-4 pb-16 lg:pb-[112px] lg:px-16 lg:mt-[144px]">
-      <div className="flex flex-col items-center justify-center gap-y-5 lg:max-w-xl xl:max-w-3xl">
+      <div className="flex flex-col items-center justify-center gap-y-5 lg:max-w-2xl xl:max-w-4xl">
         <h1 className="font-bold text-[40px] leading-[48px] lg:text-[56px] lg:leading-[67px]">
           Elevate Your Event with Our All-in-One App
         </h1>
