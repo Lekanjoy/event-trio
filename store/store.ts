@@ -15,6 +15,7 @@ type CartState = {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
+  setCart: (cart: CartItem[]) => void;
   updateItemQuantity: (id: number, quantity: number) => void;
 }
 
@@ -38,6 +39,7 @@ export const useCartStore = create<CartState>((set) => ({
     cart: state.cart.filter(item => item.id !== id)
   })),
   clearCart: () => set({ cart: [] }),
+  setCart: (cart) => set({ cart }), 
   updateItemQuantity: (id, quantity) => set((state) => ({
     cart: state.cart.map(cartItem =>
       cartItem.id === id

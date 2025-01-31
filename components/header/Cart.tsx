@@ -13,13 +13,26 @@ import Button from "../button";
 import CartItem from "./CartItem";
 import { IoCartOutline } from "react-icons/io5";
 import { useCartStore } from "@/store/store";
+import { useEffect } from "react";
 
 export default function CartSheet() {
   const cart = useCartStore((state) => state.cart);
-  const totalPrice = cart.reduce(
+  const setCart = useCartStore((state) => state.setCart);
+  const totalCartValue = cart.reduce(
     (total, item) => total + parseFloat(item.price) * item.quantity,
     0
   );
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, [setCart]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <Sheet>
@@ -55,7 +68,7 @@ export default function CartSheet() {
           {cart.length > 0 && (
             <div className="flex justify-between items-center py-2">
               <span className="font-medium">Total Price:</span>
-              <span className="font-bold">${totalPrice.toFixed(2)}</span>
+              <span className="font-bold">${totalCartValue.toFixed(2)}</span>
             </div>
           )}
           <SheetClose asChild>
