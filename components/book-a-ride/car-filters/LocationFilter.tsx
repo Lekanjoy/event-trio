@@ -62,7 +62,7 @@ export default function LocationFilter() {
               <>{selectedStatus.label}</>
             ) : (
               <>
-                + Location <MdKeyboardArrowDown />
+                Location <MdKeyboardArrowDown />
               </>
             )}
           </Button>
