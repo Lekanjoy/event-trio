@@ -16,6 +16,16 @@ footer a:hover {
     text-decoration: underline;
 }
 
+/* style filters scrollbar */
+#filters::-webkit-scrollbar-thumb {
+  /* background: #000; */
+  width: 1px; /* Adjust the width to reduce the size */
+}
+
+#filters::-webkit-scrollbar {
+  width: 1px; /* Adjust the width to reduce the size */
+}
+
 @layer base {
   :root {
         --background: 0 0% 100%;
