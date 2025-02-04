@@ -17,49 +17,28 @@ import {
 } from "@/components/ui/popover";
 import useMediaQuery from "@/hooks/use-media-query";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useQueryString from "@/hooks/useQueryString";
 
-type Status = {
-  value: string;
-  label: string;
-};
-
-const statuses: Status[] = [
-  {
-    value: "New York",
-    label: "New York",
-  },
-  {
-    value: "Lagos",
-    label: "Lagos",
-  },
-  {
-    value: "Abuja",
-    label: "Abuja",
-  },
-  {
-    value: "Vegas",
-    label: "Vegas",
-  },
-  {
-    value: "Peru",
-    label: "Peru",
-  },
-];
+const locations: string[] = ["New York", "Lagos", "Abuja", "Vegas", "Peru"];
 
 export default function LocationFilter() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-    null
-  );
+
+  const searchParams = useSearchParams();
+  const locationValue = searchParams.get("location") ?? "";
+
 
   if (isDesktop) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-[150px] justify-start">
-            {selectedStatus ? (
-              <>{selectedStatus.label}</>
+            {locationValue ? (
+              <>
+                {locationValue} <MdKeyboardArrowDown />{" "}
+              </>
             ) : (
               <>
                 Location <MdKeyboardArrowDown />
@@ -68,7 +47,7 @@ export default function LocationFilter() {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="max-w-[200px] p-0" align="start">
-          <StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
+          <StatusList setOpen={setOpen} />
         </PopoverContent>
       </Popover>
     );
@@ -78,8 +57,10 @@ export default function LocationFilter() {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline" className="max-w-[150px] justify-start">
-          {selectedStatus ? (
-            <>{selectedStatus.label}</>
+          {locationValue ? (
+            <>
+              {locationValue} <MdKeyboardArrowDown />
+            </>
           ) : (
             <>
               Location <MdKeyboardArrowDown />
@@ -89,38 +70,37 @@ export default function LocationFilter() {
       </DrawerTrigger>
       <DrawerContent>
         <div className="mt-4 border-t">
-          <StatusList setOpen={setOpen} setSelectedStatus={setSelectedStatus} />
+          <StatusList setOpen={setOpen} />
         </div>
       </DrawerContent>
     </Drawer>
   );
 }
 
-function StatusList({
-  setOpen,
-  setSelectedStatus,
-}: {
-  setOpen: (open: boolean) => void;
-  setSelectedStatus: (status: Status | null) => void;
-}) {
+function StatusList({ setOpen }: { setOpen: (open: boolean) => void }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { createQueryString } = useQueryString();
+
+  const handleLocationChange = (location: string) => {
+    router.replace(pathname + "?" + createQueryString("location", location));
+  };
   return (
     <Command>
       <CommandInput placeholder="Search location..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
-          {statuses.map((status) => (
+          {locations.map((status) => (
             <CommandItem
-              key={status.value}
-              value={status.value}
+              key={status}
+              value={status}
               onSelect={(value) => {
-                setSelectedStatus(
-                  statuses.find((priority) => priority.value === value) || null
-                );
+                handleLocationChange(value);
                 setOpen(false);
               }}
             >
-              {status.label}
+              {status}
             </CommandItem>
           ))}
         </CommandGroup>

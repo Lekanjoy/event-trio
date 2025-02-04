@@ -25,7 +25,7 @@ const SearchCars = async () => {
       <h1 className="font-bold text-xl lg:text-2xl">
         {cars.length - 1}+ cars available
       </h1>
-      <div className="w-full flex flex-col gap-y-3">
+      <div className="w-full flex flex-col gap-y-4">
         {cars?.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}

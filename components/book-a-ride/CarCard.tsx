@@ -12,7 +12,7 @@ interface CarCardProps {
 const CarCard = ({ car }: CarCardProps) => {
   return (
     <Link href={`/book-a-ride/search/${car.id}`}>
-      <div className="relative w-full shadow flex flex-col border bg-white rounded-md hover:scale-105 ease-in-out duration-300 md:flex-row">
+      <div className="relative w-full shadow flex flex-col border bg-white rounded-md  ease-in-out duration-300 md:flex-row lg:hover:scale-105">
         <div className="relative h-[250px] md:w-2/5 md:h-[150px]">
           <Image
             src={car.image_url}

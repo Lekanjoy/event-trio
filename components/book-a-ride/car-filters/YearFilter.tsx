@@ -25,7 +25,7 @@ const YearFilter = () => {
       </PopoverTrigger>
       <PopoverContent className="mt-3">
         <p className="text-sm font-medium mb-2">
-          ${value.min} - ${value.max}/day
+          {value.min} - {value.max}/day
         </p>
         <Slider
           defaultValue={[2001, 2005]}

@@ -1,7 +1,6 @@
 "use client";
-
 import * as React from "react";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,26 +11,60 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
+import useQueryString from "@/hooks/useQueryString";
 
 export default function BrandFilter() {
-  const [brandValue, setBrandValue] = React.useState("");
+  const supabase = createClient();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { createQueryString } = useQueryString();
+
+  const brand = searchParams.get("brand") ?? "";
+  const [cars, setCars] = useState<{ brand: string }[]>([]);
+
+  const handleBrandChange = (brand: string) => {
+    router.replace(pathname + "?" + createQueryString("brand", brand));
+  };
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      const { data, error } = await supabase.rpc("get_unique_brands");
+      if (error) {
+        console.error("Error fetching cars:", error);
+        return;
+      }
+      setCars(data);
+    };
+
+    fetchCars();
+  }, []);
+
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="min-w-[100px]">
-          {brandValue || "Brand"} <MdKeyboardArrowDown />
+          {brand || "Brand"} <MdKeyboardArrowDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="min-w-24">
+      <DropdownMenuContent className="min-w-24 overflow-auto h-[300px] ml-3">
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
-          value={brandValue}
-          onValueChange={setBrandValue}
+          value={brand}
+          onValueChange={(brand) => handleBrandChange(brand)}
         >
-          <DropdownMenuRadioItem value="Tesla">Tesla</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="Lexus">Lexus</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="Toyota">Toyota</DropdownMenuRadioItem>
+          {cars.map((car) => (
+            <DropdownMenuRadioItem
+              className="capitalize"
+              key={car.brand}
+              value={car.brand}
+            >
+              {car.brand}
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
