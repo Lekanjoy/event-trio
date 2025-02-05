@@ -14,6 +14,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import useQueryString from "@/hooks/useQueryString";
+import { cn } from "@/lib/utils";
 
 export default function BrandFilter() {
   const supabase = createClient();
@@ -46,7 +47,7 @@ export default function BrandFilter() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="min-w-[100px]">
+        <Button variant="outline" className={cn("min-w-[100px]", brand ? "bg-gray-700 text-white" : '')}>
           {brand || "Brand"} <MdKeyboardArrowDown />
         </Button>
       </DropdownMenuTrigger>

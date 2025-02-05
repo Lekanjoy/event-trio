@@ -19,6 +19,7 @@ import useMediaQuery from "@/hooks/use-media-query";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useQueryString from "@/hooks/useQueryString";
+import { cn } from "@/lib/utils";
 
 const locations: string[] = ["New York", "Lagos", "Abuja", "Vegas", "Peru"];
 
@@ -34,7 +35,7 @@ export default function LocationFilter() {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="w-[150px] justify-start">
+          <Button variant="outline" className={cn("w-[100px] justify-start", locationValue ? 'bg-gray-700 text-white' : '')}>
             {locationValue ? (
               <>
                 {locationValue} <MdKeyboardArrowDown />{" "}
@@ -56,7 +57,7 @@ export default function LocationFilter() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" className="max-w-[150px] justify-start">
+        <Button variant="outline"  className={cn("min-w-[100px] justify-start", locationValue ? 'bg-gray-700 text-white' : '')}>
           {locationValue ? (
             <>
               {locationValue} <MdKeyboardArrowDown />
