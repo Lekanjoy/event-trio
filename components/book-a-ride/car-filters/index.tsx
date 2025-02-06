@@ -12,7 +12,6 @@ const CarFilters = () => {
       <PriceFilter/>
       <LocationFilter/>
       <YearFilter/>
-
     </form>
   );
 };
