@@ -31,7 +31,12 @@ const MobileNav = () => {
           </Button>
         </div>
       ) : (
-        <Button onClick={logoutUser}>Logout</Button>
+        <div className="flex gap-x-2">
+          <Button as="link" href="/list-your-car" className="lg:hidden">
+            List Your Car
+          </Button>
+          <Button onClick={logoutUser}>Logout</Button>
+        </div>
       )}
     </aside>
   );

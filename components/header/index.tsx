@@ -80,8 +80,11 @@ const Header = () => {
           </div>
         ) : (
           <div className="flex items-center gap-x-4">
+            <Button as="link" href="/list-your-car" className="hidden lg:flex">
+              List Your Car
+            </Button>
             <Cart />
-            <UserMenu/>
+            <UserMenu />
           </div>
         )}
 

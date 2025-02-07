@@ -79,7 +79,10 @@ export default function CartSheet() {
           <SheetClose asChild>
             {cart.length > 0 && (
               <Button className="w-full py-3">
-                Checkout <span className="font-bold">(${totalCartValue.toFixed(2)})</span>
+                Checkout{" "}
+                <span className="font-bold">
+                  (${totalCartValue.toFixed(2)})
+                </span>
               </Button>
             )}
           </SheetClose>
