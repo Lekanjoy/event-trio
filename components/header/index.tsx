@@ -11,10 +11,10 @@ import hamburgerIcon from "@/public/landing-page/hamburgerIcon.svg";
 import closeIcon from "@/public/landing-page/closeIcon.svg";
 import logo from "@/public/landing-page/logo.png";
 import Button from "../button";
-import { logoutUser } from "@/app/(auth)/login/action";
 import useLoginStatus from "@/hooks/useLoginStatus";
 import Cart from "./Cart";
 import OneTapComponent from "@/app/(auth)/login/OneTap";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
   const pathname = usePathname();
@@ -80,10 +80,8 @@ const Header = () => {
           </div>
         ) : (
           <div className="flex items-center gap-x-4">
-            <Button onClick={logoutUser} className="hidden lg:flex">
-              Logout
-            </Button>
             <Cart />
+            <UserMenu/>
           </div>
         )}
 

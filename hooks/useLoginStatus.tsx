@@ -1,8 +1,10 @@
 import { createClient } from "@/utils/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 const useLoginStatus = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -13,13 +15,14 @@ const useLoginStatus = () => {
         setIsLoggedIn(false);
       } else {
         setIsLoggedIn(true);
+        setUser(data.user)
       }
     };
 
     fetchStatus();
   }, []);
 
-  return { isLoggedIn };
+  return { isLoggedIn, user };
 };
 
 export default useLoginStatus;
