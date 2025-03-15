@@ -29,13 +29,13 @@ export default function UserMenu() {
           />
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem onClick={logoutUser}>
+        <MenubarItem>Dashboard</MenubarItem>
+          <MenubarItem onClick={logoutUser} className="text-red-600">
             Logout{" "}
             <MenubarShortcut>
-              <IoIosLogOut size={20} />
+              <IoIosLogOut size={20} color=" #dc2626"/>
             </MenubarShortcut>
           </MenubarItem>
-          <MenubarItem>Dashboard</MenubarItem>
           <MenubarSeparator />
         </MenubarContent>
       </MenubarMenu>

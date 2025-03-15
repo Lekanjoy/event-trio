@@ -29,7 +29,7 @@
     "framer-motion": "^11.18.1",
     "google-one-tap": "^1.0.6",
     "lucide-react": "^0.473.0",
-    "next": "15.1.5",
+    "next": "^15.2.2",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.4.0",

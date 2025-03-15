@@ -34,7 +34,7 @@ const Button = ({
       <Link
         href={href}
         className={cn(
-          "border border-black text-sm w-fit h-fit  py-2 px-5 bg-black text-white font-medium lg:text-base",
+          "border border-black text-sm w-fit h-fit  py-2 px-5 bg-black text-white font-medium lg:text-base ",
           className
         )}
       >
@@ -47,7 +47,7 @@ const Button = ({
     <button
       {...(onClick && { onClick })}
       className={cn(
-        "border border-black text-sm w-fit h-fit py-2 px-5 bg-black text-white font-medium lg:text-base",
+        "border border-black text-sm w-fit h-fit py-2 px-5 bg-black text-white font-medium lg:text-base disabled:cursor-not-allowed disabled:opacity-50",
         isPending && 'opacity-50 cursor-not-allowed',
         className
       )}
