@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import Header from "@/components/header";
 import Footer from "@/components/landing-page/Footer";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rentals | EventTrio",

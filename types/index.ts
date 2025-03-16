@@ -12,3 +12,16 @@ export type CarType = {
   tripsTaken: number;
   images: string[];
 };
+
+export type CarListing = {
+  id: string;
+  user_id: string;
+  name: string;
+  brand: string;
+  year: number;
+  location: string;
+  price: number;
+  images: string[];
+  documents: string[];
+  created_at: string;
+};
