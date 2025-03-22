@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { PieChart, Pie, Tooltip, Legend } from "recharts";
 import {
   Select,
   SelectContent,
@@ -10,13 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Car,
-  Search,
-  LayoutGrid,
-  List,
-  BriefcaseBusiness,
-} from "lucide-react";
+import { Car, Search, LayoutGrid, List, BriefcaseBusiness } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCarListings } from "@/hooks/useCarListing";
 import logo from "@/public/landing-page/logo.png";
@@ -25,7 +20,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Admin = () => {
-  const { listings, loading, approveListing, rejectListing } = useCarListings();
+  const { listings, loading, approveListing, rejectListing, listingStats } =
+    useCarListings();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -57,7 +53,7 @@ const Admin = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background animate-fade-in px-4 pb-10 lg:px-16">
+    <div className="relative min-h-screen bg-background animate-fade-in px-4 pb-10 lg:px-16">
       <header className="sticky top-0 z-10 backdrop-blur-sm bg-background/90 border-b border-border/40">
         <div className="container mx-auto py-6 flex flex-col">
           <div className="flex items-center justify-between">
@@ -135,53 +131,88 @@ const Admin = () => {
         </div>
       </header>
 
-      <main className="container mx-auto border rounded-xl px-4 py-8 mt-3">
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-medium">
-              Pending Approvals ({filteredListings.length})
-            </h2>
-          </div>
-          <p className="text-muted-foreground text-sm lg:text-base">
-            Review and approve or reject the following car listings.
-          </p>
-        </div>
+      <main className="flex flex-col gap-5 md:flex-row-reverse mt-3">
+        {/* Pie Chart of Approved, Pending and Rejected Cars */}
+        <section className="container shadow-md mx-auto flex justify-center items-center border rounded-xl px-4 pb-8 h-fit md:w-fit">
+          <PieChart width={300} height={300}>
+            <Pie
+              data={[
+                {
+                  name: "Approved",
+                  value: listingStats.approved,
+                  fill: "#15803d ",
+                },
+                {
+                  name: "Pending",
+                  value: listingStats.pending,
+                  fill: "#f59e0b",
+                },
+                {
+                  name: "Rejected",
+                  value: listingStats.rejected,
+                  fill: "#b91c1c",
+                },
+              ]}
+              cx="50%"
+              cy="50%"
+              innerRadius={0}
+              outerRadius={80}
+              paddingAngle={5}
+              dataKey="value"
+            ></Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </section>
 
-        {sortedListings.length === 0 ? (
-          <div className="text-center py-12  rounded-lg">
-            <Car className="mx-auto h-12 w-12 text-muted-foreground/60" />
-            <h3 className="mt-4 text-lg font-medium">No Listings Found</h3>
-            <p className="mt-1 text-muted-foreground max-w-md mx-auto">
-              There are no pending car listings matching your search criteria.
+        <section className="container shadow-md mx-auto border rounded-xl px-4 py-8">
+          <div className="mb-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-medium">
+                Pending Approvals ({filteredListings.length})
+              </h2>
+            </div>
+            <p className="text-muted-foreground text-sm lg:text-base">
+              Review and approve or reject the following car listings.
             </p>
           </div>
-        ) : (
-          <div
-            className={cn(
-              "grid gap-6 animate-fade-in",
-              viewMode === "grid"
-                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                : "grid-cols-1"
-            )}
-          >
-            {sortedListings.map((listing, index) => (
-              <div
-                key={listing.id}
-                className={cn(
-                  "transition-all duration-300",
-                  `animation-delay-${(index % 5) * 100}`
-                )}
-              >
-                <CarListingCard
-                  listing={listing}
-                  onApprove={approveListing}
-                  onReject={rejectListing}
-                  isLoading={loading}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+
+          {sortedListings.length === 0 ? (
+            <div className="text-center py-12  rounded-lg">
+              <Car className="mx-auto h-12 w-12 text-muted-foreground/60" />
+              <h3 className="mt-4 text-lg font-medium">No Listings Found</h3>
+              <p className="mt-1 text-muted-foreground max-w-md mx-auto">
+                There are no pending car listings matching your search criteria.
+              </p>
+            </div>
+          ) : (
+            <div
+              className={cn(
+                "grid gap-6 animate-fade-in",
+                viewMode === "grid"
+                  ? "grid-cols-1 md:grid-cols-2 "
+                  : "grid-cols-1"
+              )}
+            >
+              {sortedListings.map((listing, index) => (
+                <div
+                  key={listing.id}
+                  className={cn(
+                    "transition-all duration-300",
+                    `animation-delay-${(index % 5) * 100}`
+                  )}
+                >
+                  <CarListingCard
+                    listing={listing}
+                    onApprove={approveListing}
+                    onReject={rejectListing}
+                    isLoading={loading}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       </main>
     </div>
   );

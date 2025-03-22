@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, X, Eye, FileText, MapPin } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/lib/utils";
+import DocPreview from "./DocPreview";
 
 interface CarListingCardProps {
   listing: CarListing;
@@ -56,6 +57,7 @@ export const CarListingCard = ({
   const timeAgo = formatDistanceToNow(new Date(listing.created_at), {
     addSuffix: true,
   });
+  const [showDocuments, setShowDocuments] = useState(false);
 
   return (
     <Card
@@ -110,11 +112,9 @@ export const CarListingCard = ({
       </CardHeader>
 
       <CardContent className="pb-3 space-y-4">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4" />
-            <span>{listing.location}</span>
-          </div>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <MapPin className="h-4 w-4" />
+          <span>{listing.location}</span>
         </div>
 
         <div className="text-base font-semibold">
@@ -134,11 +134,37 @@ export const CarListingCard = ({
           <Badge
             variant="secondary"
             className="flex gap-1 items-center cursor-pointer font-normal"
+            onClick={() => setShowDocuments(true)}
           >
             <FileText className="h-3.5 w-3.5" />
             <span>{listing.documents.length} documents</span>
           </Badge>
         </div>
+
+        {showDocuments && (
+          <div className="fixed inset-0 h-[105vh] -top-4 bg-black/50 flex items-center justify-center z-50">
+            <div
+              id="doc-modal"
+              className="bg-white p-6 rounded-lg max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Documents</h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowDocuments(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="grid gap-4">
+                {listing.documents.map((doc, index) => {
+                  return <DocPreview key={index} doc={doc} />;
+                })}
+              </div>
+            </div>
+          </div>
+        )}
       </CardContent>
 
       <CardFooter className="pt-5 pb-4 flex gap-2 justify-between">
