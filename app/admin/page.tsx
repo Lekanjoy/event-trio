@@ -169,7 +169,7 @@ const Admin = () => {
           <div className="mb-6">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-medium">
-                Pending Approvals ({filteredListings.length})
+                Pending Approvals ({listingStats.pending})
               </h2>
             </div>
             <p className="text-muted-foreground text-sm lg:text-base">
@@ -196,7 +196,7 @@ const Admin = () => {
             >
               {sortedListings.map((listing, index) => (
                 <div
-                  key={listing.id}
+                  key={listing.user_id}
                   className={cn(
                     "transition-all duration-300",
                     `animation-delay-${(index % 5) * 100}`

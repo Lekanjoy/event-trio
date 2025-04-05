@@ -1,31 +1,41 @@
 "use client";
 import { submitCarListing } from "@/app/actions/carActions";
 import Button from "@/components/button";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { IoMdImages } from "react-icons/io";
-import { VscFileSubmodule } from "react-icons/vsc";
+import { FormEvent, useState, useRef } from "react";
+import {
+  Dropzone,
+  DropzoneContent,
+  DropzoneEmptyState,
+} from "@/components/dropzone";
+import { useSupabaseUpload } from "@/hooks/use-supabase-upload";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CarListingForm() {
   const [loading, setLoading] = useState(false);
-  const imgRef = useRef<HTMLSpanElement>(null);
-  const docRef = useRef<HTMLSpanElement>(null);
+  const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileCount = e.target.files?.length ?? 0;
-    if (fileCount > 0 && imgRef.current) {
-      imgRef.current.textContent = `${fileCount} image${
-        fileCount > 1 ? "(s)" : ""
-      } selected`;
-    }
-  };
+  const imageUploadProps = useSupabaseUpload({
+    bucketName: "car-images",
+    allowedMimeTypes: ["image/*"],
+    maxFiles: 4,
+    maxFileSize: 1000 * 1000 * 10, // 10MB
+  });
 
-  const handleDocs = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileCount = e.target.files?.length ?? 0;
-    if (fileCount > 0 && docRef.current) {
-      docRef.current.textContent = `${fileCount} document${
-        fileCount > 1 ? "(s)" : ""
-      } selected`;
+  const documentUploadProps = useSupabaseUpload({
+    bucketName: "car-documents",
+    allowedMimeTypes: ["application/pdf", "image/*"],
+    maxFiles: 5,
+    maxFileSize: 1000 * 1000 * 10, // 10MB
+  });
+
+  const resetForm = () => {
+    if (formRef.current) {
+      formRef.current.reset();
     }
+    // Reset the dropzone files
+    imageUploadProps.setFiles([]);
+    documentUploadProps.setFiles([]);
   };
 
   const handleListing = async (
@@ -34,12 +44,38 @@ export default function CarListingForm() {
   ) => {
     e.preventDefault();
     setLoading(true);
+
+    // Add uploaded image URLs to formData
+    if (imageUploadProps.successes.length > 0) {
+      formData.append("images", JSON.stringify(imageUploadProps.successes));
+    }
+
+    // Add uploaded document URLs to formData
+    if (documentUploadProps.successes.length > 0) {
+      formData.append(
+        "documents",
+        JSON.stringify(documentUploadProps.successes)
+      );
+    }
+
     const res = await submitCarListing(formData);
     if (res.success) {
       setLoading(false);
+      toast({
+        title: "Success!",
+        description: "Your car has been listed successfully.",
+        variant: "default",
+      });
+      // Reset the form after successful submission
+      resetForm();
     } else {
       setLoading(false);
       console.error(res.error);
+      toast({
+        title: "Error",
+        description: res.error || "Failed to list your car. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -61,7 +97,13 @@ export default function CarListingForm() {
           <div className="md:flex">
             {/* Form Section */}
             <div className="w-full p-8">
-              <form onSubmit={(e) => handleListing(e, new FormData(e.currentTarget))} className="space-y-6">
+              <form
+                ref={formRef}
+                onSubmit={(e) =>
+                  handleListing(e, new FormData(e.currentTarget))
+                }
+                className="space-y-6"
+              >
                 <div className="space-y-6">
                   <div>
                     <label
@@ -110,7 +152,7 @@ export default function CarListingForm() {
                         name="year"
                         required
                         min="1900"
-                        max="2025"
+                        max={new Date().getFullYear()}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="e.g. 2022"
                       />
@@ -157,82 +199,33 @@ export default function CarListingForm() {
                     <label className="block text-sm lg:text-base font-medium mb-2">
                       Car Images
                     </label>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
-                      <input
-                        type="file"
-                        id="images"
-                        name="images"
-                        multiple
-                        accept="image/*"
-                        required
-                        className="hidden"
-                        onChange={(e) => handleImages(e)}
-                      />
-                      <label
-                        htmlFor="images"
-                        className="cursor-pointer flex flex-col items-center"
-                      >
-                        <IoMdImages
-                          className="mb-5"
-                          size={80}
-                          color="#6b7280"
-                        />
-                        <span className="text-primary font-medium">
-                          Click to upload images
-                        </span>
-                        <span
-                          ref={imgRef}
-                          className="text-gray-500 text-sm mt-1"
-                        >
-                          Upload high-quality images of your car
-                        </span>
-                      </label>
-                    </div>
+                    <Dropzone {...imageUploadProps}>
+                      <DropzoneEmptyState />
+                      <DropzoneContent />
+                    </Dropzone>
                   </div>
 
                   <div>
                     <label className="block text-sm lg:text-base font-medium mb-2">
                       Car Documents
                     </label>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
-                      <input
-                        type="file"
-                        id="documents"
-                        name="documents"
-                        multiple
-                        required
-                        className="hidden"
-                        onChange={(e) => handleDocs(e)}
-                      />
-                      <label
-                        htmlFor="documents"
-                        className="cursor-pointer flex flex-col items-center"
-                      >
-                        <VscFileSubmodule
-                          className="mb-5"
-                          size={80}
-                          color="#6b7280"
-                        />
-                        <span className="text-primary font-medium">
-                          Click to upload documents
-                        </span>
-                        <span
-                          ref={docRef}
-                          className="text-gray-500 text-sm mt-1"
-                        >
-                          Upload registration, title, service history, etc.
-                        </span>
-                      </label>
-                    </div>
+                    <Dropzone {...documentUploadProps}>
+                      <DropzoneEmptyState />
+                      <DropzoneContent />
+                    </Dropzone>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4 pt-4">
                   <Button
-                    disabled={loading}
+                    disabled={
+                      loading ||
+                      !imageUploadProps.isSuccess ||
+                      !documentUploadProps.isSuccess
+                    }
                     className="w-full rounded-md"
                   >
-                    {loading ? 'Submitting...' : 'List'}
+                    {loading ? "Submitting..." : "List"}
                   </Button>
                 </div>
               </form>

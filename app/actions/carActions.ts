@@ -1,5 +1,4 @@
 "use server";
-import { uploadFile } from "@/lib/uploadFile";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
@@ -24,32 +23,59 @@ export async function submitCarListing(formData: FormData) {
     return { error: "All fields are required" };
   }
 
-  // Handle files
-  const images = formData.getAll("images") as File[];
-  const documents = formData.getAll("documents") as File[];
+  // Handle files 
+  const imagesValue = formData.get("images");
+  const documentsValue = formData.get("documents");
+
+  let images: string[] = [];
+  let documents: string[] = [];
+
+  try {
+    if (typeof imagesValue === "string") {
+      images = JSON.parse(imagesValue);
+    }
+
+    if (typeof documentsValue === "string") {
+      documents = JSON.parse(documentsValue);
+    }
+  } catch (error) {
+    console.error("Error parsing file URLs:", error);
+    return { error: "Invalid file data format" };
+  }
 
   if (!images.length || !documents.length) {
     return { error: "Please upload at least one image and document" };
   }
 
   try {
-    // Upload images and documents to Supabase Storage
-    const uploadedImages = await Promise.all(
-      images.map((file) => uploadFile(file, "car-images"))
-    );
-    const uploadedDocuments = await Promise.all(
-      documents.map((file) => uploadFile(file, "car-documents"))
+    // Convert file paths to public URLs
+    const imageUrls = await Promise.all(
+      images.map(async (filePath) => {
+        const { data } = (await supabase).storage
+          .from("car-images")
+          .getPublicUrl(filePath);
+        return data.publicUrl;
+      })
     );
 
-    // Insert into car_listings table
+    const documentUrls = await Promise.all(
+      documents.map(async (filePath) => {
+        const { data } = (await supabase).storage
+          .from("car-documents")
+          .getPublicUrl(filePath);
+        return data.publicUrl;
+      })
+    );
+
+    // Insert into car_listings table with public URLs
     const { error } = await (await supabase).from("pending_cars").insert({
       name,
       brand,
       year,
       location,
       price,
-      images: uploadedImages,
-      documents: uploadedDocuments,
+      images: imageUrls,
+      documents: documentUrls,
     });
 
     if (error) console.error(error);

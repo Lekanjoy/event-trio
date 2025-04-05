@@ -34,12 +34,12 @@ export const CarListingCard = ({
 
   const handleApprove = () => {
     setIsRemoving(true);
-    onApprove(listing.id);
+    onApprove(listing.user_id);
   };
 
   const handleReject = () => {
     setIsRemoving(true);
-    onReject(listing.id);
+    onReject(listing.user_id);
   };
 
   const nextImage = () => {
