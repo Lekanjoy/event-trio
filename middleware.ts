@@ -1,8 +1,22 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
+import { getUser } from './app/(auth)/login/action';
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  const res = await updateSession(request)
+
+  const pathname = request.nextUrl.pathname
+  const isAuthPage = ['/login', '/sign-up'].includes(pathname);
+  const user = await getUser();
+
+  if (isAuthPage) {
+    // If signed in and on auth page, redirect to home
+    if (user) {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+  }
+
+  return res
 }
 
 export const config = {

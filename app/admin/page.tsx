@@ -19,7 +19,8 @@ import { CarListingCard } from "./components/CarListingCard";
 import Link from "next/link";
 import Image from "next/image";
 
-const Admin = () => {
+const Admin =  () => {
+
   const { listings, loading, approveListing, rejectListing, listingStats } =
     useCarListings();
   const [searchTerm, setSearchTerm] = useState("");
